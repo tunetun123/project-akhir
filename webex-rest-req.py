@@ -29,6 +29,21 @@ def list_people(mail):
     res = requests.get(url, headers=headers, params=params)
     print(json.dumps(res.json(), indent=4))
 
+def list_rooms(max):
+    url = base_url + 'rooms'
+
+    headers = {
+        'Authorization': 'Bearer {}'.format(access_token),
+        'Content-Type': 'application/json'
+    }
+
+    params = {
+        'max': str(max)
+    }
+
+    res = requests.get(url, headers=headers, params=params)
+    print(res.json())
+
 if __name__ == "__main__":
     while True:
         print('Menu')
@@ -47,9 +62,9 @@ if __name__ == "__main__":
             case 2:
                 mail = input('email: ')
                 list_people(mail)
-            # case 3:
-            #     max = input('batas max: ')
-            #     list_rooms(max)
+            case 3:
+                max = input('batas max: ')
+                list_rooms(max)
             # case 4:
             #     title = input('Nama Room: ')
             #     create_rooms(title)
