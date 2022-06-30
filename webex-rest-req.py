@@ -44,6 +44,38 @@ def list_rooms(max):
     res = requests.get(url, headers=headers, params=params)
     print(res.json())
 
+def create_rooms(title):
+    url = base_url + 'rooms'
+
+    headers = {
+        'Authorization': 'Bearer {}'.format(access_token),
+        'Content-Type': 'application/json'
+    }
+
+    params = {
+        'title': str(title)
+    }
+
+    res = requests.post(url, headers=headers, json=params)
+    print(res.json())
+
+
+def add_membership(room_id, person_mail):
+    url = base_url + 'memberships'
+
+    headers = {
+        'Authorization': 'Bearer {}'.format(access_token),
+        'Content-Type': 'application/json'
+    }
+
+    params = {
+        'roomId': str(room_id),
+        'personEmail': str(person_mail)
+    }
+
+    res = requests.post(url, headers=headers, json=params)
+    print(res.json())
+
 if __name__ == "__main__":
     while True:
         print('Menu')
@@ -65,13 +97,13 @@ if __name__ == "__main__":
             case 3:
                 max = input('batas max: ')
                 list_rooms(max)
-            # case 4:
-            #     title = input('Nama Room: ')
-            #     create_rooms(title)
-            # case 5:
-            #     room_id = input('ID Room: ')
-            #     person_mail = input('Email Person: ')
-            #     add_membership(room_id, person_mail)
+            case 4:
+                title = input('Nama Room: ')
+                create_rooms(title)
+            case 5:
+                room_id = input('ID Room: ')
+                person_mail = input('Email Person: ')
+                add_membership(room_id, person_mail)
             case 0:
                 break
         print('\n')
