@@ -14,6 +14,21 @@ def check_access_token():
     res = requests.get(url, headers=headers)
     print(json.dumps(res.json(), indent=4))
 
+def list_people(mail):
+    url = base_url + 'people'
+
+    headers = {
+        'Authorization': 'Bearer {}'.format(access_token),
+        'Content-Type': 'application/json'
+    }
+
+    params = {
+        'email': str(mail)
+    }
+
+    res = requests.get(url, headers=headers, params=params)
+    print(json.dumps(res.json(), indent=4))
+
 if __name__ == "__main__":
     while True:
         print('Menu')
@@ -29,9 +44,9 @@ if __name__ == "__main__":
         match pilihan:
             case 1:
                 check_access_token()
-            # case 2:
-            #     mail = input('email: ')
-            #     list_people(mail)
+            case 2:
+                mail = input('email: ')
+                list_people(mail)
             # case 3:
             #     max = input('batas max: ')
             #     list_rooms(max)
